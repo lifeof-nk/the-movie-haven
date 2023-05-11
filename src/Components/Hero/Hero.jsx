@@ -16,7 +16,7 @@ const Hero = () => {
         <div className="center--nav">
           <div className="search--bar">
             <SearchIcon className="search--icon" />
-            <input type="text" placeholder="Enter your Keywords" />
+            <input type="text" placeholder="Enter your keywords..." />
           </div>
         </div>
         <div className="right--nav">
