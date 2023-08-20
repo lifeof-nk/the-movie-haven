@@ -31,8 +31,12 @@ function App() {
   };
 
   const movie = movies.map((movie) => (
-    <div>
-      <Movie image={movie.backdrop_path} title={movie.original_title} />
+    <div className="movie--component">
+      <Movie
+        key={movie.backdrop_path}
+        image={movie.backdrop_path}
+        title={movie.original_title}
+      />
     </div>
   ));
 
@@ -49,7 +53,7 @@ function App() {
         />
         <button>Search</button>
       </form>
-      {movie}
+      <div className="movies">{movie}</div>
     </div>
   );
 }
