@@ -1,6 +1,6 @@
 import React from "react";
 
-const Movie = (props) => {
+const TopRated = (props) => {
   return (
     <div className="movie--tile">
       <div className="image">
@@ -19,4 +19,4 @@ const Movie = (props) => {
   );
 };
 
-export default Movie;
+export default TopRated;
