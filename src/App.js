@@ -100,6 +100,7 @@ function App() {
   return (
     <div className="App">
       <form onSubmit={handleSearch} className="form">
+        <h1>The Movie Haven</h1>
         <input
           type="text"
           placeholder="Search movies..."
@@ -114,7 +115,7 @@ function App() {
         <button
           className="trend--button"
           onClick={() => {
-            setDayWeek("day");
+            setDayWeek((prevDayWeek) => (prevDayWeek = "day"));
           }}
         >
           Day
@@ -122,7 +123,7 @@ function App() {
         <button
           className="trend--button"
           onClick={() => {
-            setDayWeek("week");
+            setDayWeek((prevDayWeek) => (prevDayWeek = "week"));
           }}
         >
           Week
@@ -130,12 +131,12 @@ function App() {
       </h3>
       <div className="trending">{trendingMovies}</div>
       {query ? (
+        <div className="movies">{movie}</div>
+      ) : (
         <div>
           <h3>Top Rated</h3>
           <div className="movies">{ratedMovies}</div>
         </div>
-      ) : (
-        <div className="movies">{movie}</div>
       )}
     </div>
   );
