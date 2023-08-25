@@ -63,8 +63,8 @@ function App() {
   const movie = movies.map((movie) => (
     <div className="movie--component">
       <Movie
-        key={movie.backdrop_path}
-        image={movie.backdrop_path}
+        key={movie.id}
+        image={movie.poster_path}
         title={movie.original_title}
         type={movie.media_type}
         rating={movie.vote_average}
@@ -100,15 +100,20 @@ function App() {
   return (
     <div className="App">
       <form onSubmit={handleSearch} className="form">
-        <h1>The Movie Haven</h1>
-        <input
-          type="text"
-          placeholder="Search movies..."
-          value={search}
-          onChange={updateSearch}
-          className="form--input"
-        />
-        <button className="form--button">Search</button>
+        <div className="form--left">
+          <h1>The Movie Haven</h1>
+        </div>
+        <div className="form--center">
+          <input
+            type="text"
+            placeholder="Search movies..."
+            value={search}
+            onChange={updateSearch}
+            className="form--input"
+          />
+          <button className="form--button">Search</button>
+        </div>
+        <div className="form--right"></div>
       </form>
       <h3 className="trending--heading">
         Trending
