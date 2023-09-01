@@ -48,6 +48,9 @@ function App() {
   /**
    * updating search input value
    */
+  const handleDayWeekToggle = (event) => {
+    setDayWeek(event.target.value);
+  };
 
   const updateSearch = (event) => {
     setSearch(event.target.value);
@@ -101,7 +104,7 @@ function App() {
     <div className="App">
       <form onSubmit={handleSearch} className="form">
         <div className="form--left">
-          <h1>The Movie Haven</h1>
+          <h1>the adsfsdasdas</h1>
         </div>
         <div className="form--center">
           <input
@@ -115,32 +118,24 @@ function App() {
         </div>
         <div className="form--right"></div>
       </form>
-      <h3 className="trending--heading">
-        Trending
-        <button
-          className="trend--button"
-          onClick={() => {
-            setDayWeek((prevDayWeek) => (prevDayWeek = "day"));
-          }}
-        >
-          Day
-        </button>
-        <button
-          className="trend--button"
-          onClick={() => {
-            setDayWeek((prevDayWeek) => (prevDayWeek = "week"));
-          }}
-        >
-          Week
-        </button>
-      </h3>
+      <div className="options--container">
+        <h3 className="trending--heading">Trending</h3>
+        <select value={dayWeek} onChange={handleDayWeekToggle}>
+          <option value="day">Day</option>
+          <option value="week">Week</option>
+        </select>
+      </div>
+
       <div className="trending">{trendingMovies}</div>
       {query ? (
         <div className="movies">{movie}</div>
       ) : (
-        <div>
-          <h3>Top Rated</h3>
-          <div className="movies">{ratedMovies}</div>
+        <div className="sections">
+          <div className="top--rated">
+            <h3>Top Rated</h3>
+            <div className="movies">{ratedMovies}</div>
+          </div>
+          <div className="section-2">the other section</div>
         </div>
       )}
     </div>

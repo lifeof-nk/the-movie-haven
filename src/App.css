@@ -3,6 +3,8 @@
   margin: 0;
 }
 .App {
+  display: flex;
+  flex-direction: column;
   padding: 0;
   margin: 0;
   background: linear-gradient(to bottom, #323232 0%, #3f3f3f 40%, #1c1c1c 150%),
@@ -73,12 +75,35 @@
   cursor: pointer;
 }
 
+.options--container {
+  display: flex;
+  align-items: center;
+}
+
+.options--container select {
+  background-color: aqua;
+  font-weight: bold;
+  text-align: center;
+  width: 100px;
+  outline: none;
+  padding: 5px 10px;
+  font-size: 20px;
+}
+
+.options--container select option {
+  background-color: #323232;
+  color: aliceblue;
+  border: none;
+}
+
+.options--container select option:hover {
+}
+
 .movies {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   padding: 20px;
-  justify-content: center;
 }
 
 .movie--component {
@@ -158,18 +183,6 @@
   letter-spacing: 3px;
 }
 
-.trend--button {
-  padding: 7px;
-  font-size: 15px;
-  background-color: aqua;
-  border: none;
-  border-right: 2px solid black;
-  font-weight: bold;
-  padding: 10px;
-  cursor: pointer;
-  margin-left: 5px;
-}
-
 .trending::-webkit-scrollbar {
   height: 8px;
 }
@@ -177,4 +190,21 @@
 .trending::-webkit-scrollbar-thumb {
   background: linear-gradient(aqua, rgb(48, 112, 112));
   width: 10px;
+}
+
+.sections {
+  display: flex;
+}
+
+.top--rated {
+  flex: 3;
+}
+.top--rated h3 {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+.section-2 {
+  flex: 1;
 }
