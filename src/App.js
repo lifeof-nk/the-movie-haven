@@ -3,7 +3,8 @@ import "./App.css";
 import Movie from "./Movie";
 import Trending from "./Trending";
 import TopRated from "./TopRated";
-import SmartDisplayRoundedIcon from "@mui/icons-material/SmartDisplayRounded";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -121,7 +122,10 @@ function App() {
         <div className="form--right"></div>
       </form>
       <div className="options--container">
-        <h3 className="trending--heading">Trending</h3>
+        <h3 className="trending--heading">
+          <WhatshotIcon />
+          Trending
+        </h3>
         <select value={dayWeek} onChange={handleDayWeekToggle}>
           <option value="day">Day</option>
           <option value="week">Week</option>
@@ -135,7 +139,7 @@ function App() {
         <div className="sections">
           <div className="top--rated">
             <h3>
-              <SmartDisplayRoundedIcon /> Rated Movies
+              <SmartDisplayIcon /> Rated Movies
             </h3>
             <div className="movies">{ratedMovies}</div>
           </div>
