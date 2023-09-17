@@ -3,6 +3,7 @@ import "./App.css";
 import Movie from "./Movie";
 import Trending from "./Trending";
 import TopRated from "./TopRated";
+import SmartDisplayRoundedIcon from "@mui/icons-material/SmartDisplayRounded";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -94,6 +95,7 @@ function App() {
         image={movie.poster_path}
         rating={movie.vote_average}
         title={movie.title}
+        media_type={movie.media_type}
       />
     </div>
   ));
@@ -132,7 +134,9 @@ function App() {
       ) : (
         <div className="sections">
           <div className="top--rated">
-            <h3>Top Rated</h3>
+            <h3>
+              <SmartDisplayRoundedIcon /> Rated Movies
+            </h3>
             <div className="movies">{ratedMovies}</div>
           </div>
           <div className="section-2">the other section</div>

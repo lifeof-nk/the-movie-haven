@@ -10,9 +10,10 @@ const TopRated = (props) => {
         />
       </div>
       <div className="movie--info">
-        <h4 className="movie--title">{props.title}</h4>
-        <span>Rating: {`${Math.floor(props.rating)}/10`}</span>
+        <span>Movie</span>
+        <span> {`${Math.floor(props.rating)}/10`}</span>
       </div>
+      <h4 className="movie--title">{props.title}</h4>
     </div>
   );
 };
