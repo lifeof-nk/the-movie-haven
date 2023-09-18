@@ -6,6 +6,8 @@ import TopRated from "./TopRated";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 
+import Popular from "./Popular";
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
@@ -13,6 +15,7 @@ function App() {
   const [trending, setTrending] = useState([]);
   const [dayWeek, setDayWeek] = useState("day");
   const [topRated, setTopRated] = useState([]);
+  const [popular, setPopular] = useState([]);
 
   /**
    * fetching the data from TMDB API
@@ -40,11 +43,19 @@ function App() {
       .then((response) => response.json())
       .then((data) => setTopRated(data.results));
   };
+  const fetchPopular = () => {
+    fetch(
+      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=bdbcaf8078edff33ef48cf08aa49f28f"
+    )
+      .then((response) => response.json())
+      .then((data) => setPopular(data.results));
+  };
 
   useEffect(() => {
     getMovies();
     fetchTrending();
     fetchTopRated();
+    fetchPopular();
   }, [query, dayWeek]);
 
   /**
@@ -101,6 +112,18 @@ function App() {
     </div>
   ));
 
+  const popularMovies = popular.slice(0, 9).map((movie) => (
+    <div className="popular--movies">
+      <Popular
+        key={movie.id}
+        image={movie.poster_path}
+        title={movie.title}
+        release_date={movie.release_date}
+        media_type={movie.media_type}
+      />
+    </div>
+  ));
+
   // console.log(movies);
 
   return (
@@ -123,7 +146,7 @@ function App() {
       </form>
       <div className="options--container">
         <h3 className="trending--heading">
-          <WhatshotIcon />
+          <WhatshotIcon className="display--icon" />
           Trending
         </h3>
         <select value={dayWeek} onChange={handleDayWeekToggle}>
@@ -139,11 +162,18 @@ function App() {
         <div className="sections">
           <div className="top--rated">
             <h3>
-              <SmartDisplayIcon /> Rated Movies
+              <SmartDisplayIcon className="display--icon" /> Rated Movies
             </h3>
             <div className="movies">{ratedMovies}</div>
           </div>
-          <div className="section-2">the other section</div>
+          <div className="section-2">
+            <h3>
+              {" "}
+              <SmartDisplayIcon className="display--icon" />
+              Now Playing
+            </h3>
+            {popularMovies}
+          </div>
         </div>
       )}
     </div>
