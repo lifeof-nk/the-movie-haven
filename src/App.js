@@ -112,7 +112,7 @@ function App() {
     </div>
   ));
 
-  const popularMovies = popular.slice(0, 9).map((movie) => (
+  const popularMovies = popular.slice(0, 10).map((movie) => (
     <div className="popular--movies">
       <Popular
         key={movie.id}
@@ -156,26 +156,27 @@ function App() {
       </div>
 
       <div className="trending">{trendingMovies}</div>
-      {query ? (
-        <div className="movies">{movie}</div>
-      ) : (
-        <div className="sections">
-          <div className="top--rated">
-            <h3>
-              <SmartDisplayIcon className="display--icon" /> Rated Movies
-            </h3>
-            <div className="movies">{ratedMovies}</div>
-          </div>
-          <div className="section-2">
-            <h3>
-              {" "}
-              <SmartDisplayIcon className="display--icon" />
-              Now Playing
-            </h3>
-            {popularMovies}
-          </div>
+      <section className="sections">
+        <div className="section-1">
+          {query ? (
+            <div className="movies">{movie}</div>
+          ) : (
+            <div className="top--rated">
+              <h3>
+                <SmartDisplayIcon className="display--icon" /> Top Rated Movies
+              </h3>
+              <div className="movies">{ratedMovies}</div>
+            </div>
+          )}
         </div>
-      )}
+        <div className="section-2">
+          <h3>
+            <SmartDisplayIcon className="display--icon" />
+            Now Playing
+          </h3>
+          {popularMovies}
+        </div>
+      </section>
     </div>
   );
 }

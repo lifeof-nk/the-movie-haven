@@ -197,6 +197,10 @@
   display: flex;
 }
 
+.sections .section-1 {
+  flex: 3;
+}
+
 .top--rated {
   flex: 3;
 }
