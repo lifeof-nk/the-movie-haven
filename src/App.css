@@ -218,9 +218,18 @@
   flex: 1;
 }
 
+.section-2 div {
+  margin-bottom: 7px;
+}
+
 .section-2 h3 {
   margin-top: 20px;
+  margin-bottom: 10px;
   font-size: 30px;
+}
+
+.tvSeriesHeading {
+  margin-bottom: 10px;
 }
 
 .popular--container {

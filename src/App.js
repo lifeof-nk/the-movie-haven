@@ -7,7 +7,7 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 
 import Popular from "./Popular";
-import PopularSeries from "../PopularSeries";
+import PopularSeries from "./PopularSeries";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -58,7 +58,7 @@ function App() {
       "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=vote_count.desc&api_key=bdbcaf8078edff33ef48cf08aa49f28f"
     )
       .then((response) => response.json())
-      .then((data) => console.log(data.results));
+      .then((data) => setPopularSeries(data.results));
   };
 
   useEffect(() => {
@@ -137,7 +137,13 @@ function App() {
 
   const popularTvSeries = popularSeries.slice(0, 10).map((series) => (
     <div>
-      <PopularSeries />
+      <PopularSeries
+        key={series.id}
+        title={series.name}
+        rating={series.vote_average}
+        release_date={series.first_air_date}
+        image={series.poster_path}
+      />
     </div>
   ));
 
@@ -193,6 +199,13 @@ function App() {
               Now Playing
             </h3>
             {popularMovies}
+          </div>
+          <div>
+            <h3 className="tvSeriesHeading">
+              <SmartDisplayIcon className="display--icon" />
+              Popular Tv Series
+            </h3>
+            {popularTvSeries}
           </div>
         </div>
       </section>
