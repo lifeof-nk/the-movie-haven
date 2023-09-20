@@ -7,6 +7,7 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 
 import Popular from "./Popular";
+import PopularSeries from "../PopularSeries";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -16,6 +17,7 @@ function App() {
   const [dayWeek, setDayWeek] = useState("day");
   const [topRated, setTopRated] = useState([]);
   const [popular, setPopular] = useState([]);
+  const [popularSeries, setPopularSeries] = useState([]);
 
   /**
    * fetching the data from TMDB API
@@ -51,11 +53,20 @@ function App() {
       .then((data) => setPopular(data.results));
   };
 
+  const fetchPopularSeries = () => {
+    fetch(
+      "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=vote_count.desc&api_key=bdbcaf8078edff33ef48cf08aa49f28f"
+    )
+      .then((response) => response.json())
+      .then((data) => console.log(data.results));
+  };
+
   useEffect(() => {
     getMovies();
     fetchTrending();
     fetchTopRated();
     fetchPopular();
+    fetchPopularSeries();
   }, [query, dayWeek]);
 
   /**
@@ -124,6 +135,12 @@ function App() {
     </div>
   ));
 
+  const popularTvSeries = popularSeries.slice(0, 10).map((series) => (
+    <div>
+      <PopularSeries />
+    </div>
+  ));
+
   // console.log(movies);
 
   return (
@@ -170,11 +187,13 @@ function App() {
           )}
         </div>
         <div className="section-2">
-          <h3>
-            <SmartDisplayIcon className="display--icon" />
-            Now Playing
-          </h3>
-          {popularMovies}
+          <div>
+            <h3>
+              <SmartDisplayIcon className="display--icon" />
+              Now Playing
+            </h3>
+            {popularMovies}
+          </div>
         </div>
       </section>
     </div>
