@@ -76,27 +76,42 @@
   cursor: pointer;
 }
 
-.options--container {
+.trending-heading-container {
   display: flex;
   align-items: center;
 }
 
-.options--container select {
-  background-color: aqua;
-  font-weight: bold;
-  text-align: center;
-  width: 80px;
-  outline: none;
+.button--container {
+  display: flex;
+  gap: 7px;
+}
+
+.notActive:hover,
+.activeButton:hover {
+  outline: 1px solid aqua;
+  cursor: pointer;
+  color: aqua;
+}
+
+.notActive {
   padding: 5px 10px;
-  font-size: 15px;
-}
-
-.options--container select option {
-  background-color: #323232;
-  color: aliceblue;
   border: none;
+  outline: 1px solid rgb(70, 69, 69);
+  font-weight: bold;
+  color: darkgray;
+  background: transparent;
+  border-radius: 6px;
 }
 
+.activeButton {
+  padding: 5px 10px;
+  background: transparent;
+  outline: 1px solid aqua;
+  border: none;
+  color: aqua;
+  font-weight: bold;
+  border-radius: 6px;
+}
 .movies {
   display: flex;
   flex-wrap: wrap;

@@ -18,6 +18,7 @@ function App() {
   const [topRated, setTopRated] = useState([]);
   const [popular, setPopular] = useState([]);
   const [popularSeries, setPopularSeries] = useState([]);
+  const [activeButton, setActiveButton] = useState("day");
 
   /**
    * fetching the data from TMDB API
@@ -72,8 +73,13 @@ function App() {
   /**
    * updating search input value
    */
-  const handleDayWeekToggle = (event) => {
-    setDayWeek(event.target.value);
+  const handleDayWeek = (selectedDayWeek) => {
+    setDayWeek(selectedDayWeek);
+  };
+
+  const handleButtonClick = (buttonName) => {
+    // Update the state to track which button has been clicked
+    setActiveButton(buttonName);
   };
 
   const updateSearch = (event) => {
@@ -166,15 +172,31 @@ function App() {
         </div>
         <div className="form--right"></div>
       </form>
-      <div className="options--container">
+      <div className="trending-heading-container">
         <h3 className="trending--heading">
           <WhatshotIcon className="display--icon" />
           Trending
         </h3>
-        <select value={dayWeek} onChange={handleDayWeekToggle}>
-          <option value="day">Day</option>
-          <option value="week">Week</option>
-        </select>
+        <div className="button--container">
+          <button
+            onClick={() => {
+              handleDayWeek("day");
+              handleButtonClick("day");
+            }}
+            className={activeButton === "day" ? "activeButton" : "notActive"}
+          >
+            Day
+          </button>
+          <button
+            onClick={() => {
+              handleDayWeek("week");
+              handleButtonClick("week");
+            }}
+            className={activeButton === "week" ? "activeButton" : "notActive"}
+          >
+            Week
+          </button>
+        </div>
       </div>
 
       <div className="trending">{trendingMovies}</div>
