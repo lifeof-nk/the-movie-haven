@@ -86,7 +86,6 @@ function App() {
     setSearch("");
   };
 
-  //mapping through list of movies collected from api to display on the screen
   const movie = movies.map((movie) => (
     <div className="movie--component">
       <Movie
