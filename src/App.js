@@ -3,11 +3,12 @@ import "./App.css";
 import Movie from "./Movie";
 import Trending from "./Trending";
 import TopRated from "./TopRated";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
-
 import Popular from "./Popular";
 import PopularSeries from "./PopularSeries";
+import Tvseries from "./Tvseries";
+
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -18,6 +19,7 @@ function App() {
   const [topRated, setTopRated] = useState([]);
   const [popular, setPopular] = useState([]);
   const [popularSeries, setPopularSeries] = useState([]);
+  const [tvSeries, setTvSeries] = useState([]);
   const [activeButton, setActiveButton] = useState("day");
 
   /**
@@ -62,12 +64,21 @@ function App() {
       .then((data) => setPopularSeries(data.results));
   };
 
+  const fetchTvSeries = () => {
+    fetch(
+      "https://api.themoviedb.org/3/trending/tv/week?language=en-US&api_key=bdbcaf8078edff33ef48cf08aa49f28f"
+    )
+      .then((response) => response.json())
+      .then((data) => setTvSeries(data.results));
+  };
+
   useEffect(() => {
     getMovies();
     fetchTrending();
     fetchTopRated();
     fetchPopular();
     fetchPopularSeries();
+    fetchTvSeries();
   }, [query, dayWeek]);
 
   /**
@@ -152,6 +163,16 @@ function App() {
     </div>
   ));
 
+  const series = tvSeries.map((item) => (
+    <Tvseries
+      key={item.id}
+      image={item.poster_path}
+      title={item.name}
+      rating={item.vote_average}
+      media_type={item.media_type}
+    />
+  ));
+
   // console.log(movies);
 
   return (
@@ -175,7 +196,7 @@ function App() {
       <div className="trending-heading-container">
         <h3 className="trending--heading">
           <WhatshotIcon className="display--icon" />
-          Trending
+          Trending Movies
         </h3>
         <div className="button--container">
           <button
@@ -205,11 +226,21 @@ function App() {
           {query ? (
             <div className="movies">{movie}</div>
           ) : (
-            <div className="top--rated">
-              <h3>
-                <SmartDisplayIcon className="display--icon" /> Top Rated Movies
-              </h3>
-              <div className="movies">{ratedMovies}</div>
+            <div>
+              <div className="top--rated">
+                <h3>
+                  <SmartDisplayIcon className="display--icon" /> Top Rated
+                  Movies
+                </h3>
+                <div className="movies">{ratedMovies}</div>
+              </div>
+              <div className="recommended--series">
+                <h3>
+                  <SmartDisplayIcon className="display--icon" />
+                  Latest TV Shows
+                </h3>
+                <div className="movies">{series}</div>
+              </div>
             </div>
           )}
         </div>
@@ -230,6 +261,7 @@ function App() {
           </div>
         </div>
       </section>
+      <div>This is the footer</div>
     </div>
   );
 }
