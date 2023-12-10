@@ -17,8 +17,15 @@
 .form {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 100vw;
   margin-bottom: 20px;
+  padding: 1.25rem;
+  /* position: fixed; */
+  z-index: 999;
+  top: 0px;
+  border-bottom-width: 2px;
+  border-color: #eee;
+  background-color: #07100e;
 }
 
 .form .form--left {
@@ -45,6 +52,7 @@
   width: 100%;
   display: flex;
   flex: 1;
+  gap: 4px;
   justify-content: center;
   align-items: center;
 }
@@ -63,7 +71,7 @@
   border: none;
   padding: 10px 15px;
   font-size: 15px;
-  width: 15%;
+  width: 20%;
   text-align: center;
   background-color: aqua;
   font-weight: bold;
