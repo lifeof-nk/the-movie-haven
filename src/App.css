@@ -18,9 +18,9 @@
   display: flex;
   justify-content: space-between;
   width: 100vw;
-  margin-bottom: 20px;
+  margin-bottom: 3.5rem;
   padding: 1.25rem;
-  /* position: fixed; */
+  position: fixed;
   z-index: 999;
   top: 0px;
   border-bottom-width: 2px;
@@ -81,6 +81,7 @@
 .trending-heading-container {
   display: flex;
   align-items: center;
+  margin-top: 8rem;
 }
 
 .button--container {

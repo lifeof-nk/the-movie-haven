@@ -9,6 +9,7 @@ import Tvseries from "./Tvseries";
 
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
+import Header from "./Header";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -177,22 +178,11 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={handleSearch} className="form">
-        <div className="form--left">
-          <h1>the adsfsdasdas</h1>
-        </div>
-        <div className="form--center">
-          <input
-            type="text"
-            placeholder="Search movies..."
-            value={search}
-            onChange={updateSearch}
-            className="form--input"
-          />
-          <button className="form--button">Search</button>
-        </div>
-        <div className="form--right"></div>
-      </form>
+      <Header
+        updateSearch={updateSearch}
+        handleSearch={handleSearch}
+        search={search}
+      />
       <div className="trending-heading-container">
         <h3 className="trending--heading">
           <WhatshotIcon className="display--icon" />
