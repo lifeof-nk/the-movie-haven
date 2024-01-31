@@ -22,60 +22,77 @@ function App() {
   const [popularSeries, setPopularSeries] = useState([]);
   const [tvSeries, setTvSeries] = useState([]);
   const [activeButton, setActiveButton] = useState("day");
+  const [fetching, setIsFetching] = useState(false);
 
   /**
    * fetching the data from TMDB API
    */
-  const getMovies = () => {
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1&api_key=bdbcaf8078edff33ef48cf08aa49f28f`
-    )
-      .then((response) => response.json())
-      .then((data) => setMovies(data.results));
+  // const getMovies = () => {
+
+  //   fetch(
+  //     `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1&api_key=bdbcaf8078edff33ef48cf08aa49f28f`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => setMovies(data.results));
+  // };
+
+  const getMovies = async (query) => {
+    setIsFetching(true);
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1&api_key=bdbcaf8078edff33ef48cf08aa49f28f`
+      );
+      const data = await response.json();
+      setMovies(data.results);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsFetching(false);
+    }
   };
 
-  const fetchTrending = () => {
-    fetch(
+  const fetchTrending = async (dayWeek) => {
+    const response = await fetch(
       `https://api.themoviedb.org/3/trending/movie/${dayWeek}?language=en-US&api_key=bdbcaf8078edff33ef48cf08aa49f28f`
-    )
-      .then((response) => response.json())
-      .then((data) => setTrending(data.results));
+    );
+    const data = await response.json();
+    setTrending(data.results);
   };
 
-  const fetchTopRated = () => {
-    fetch(
+  const fetchTopRated = async () => {
+    const response = await fetch(
       `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_key=bdbcaf8078edff33ef48cf08aa49f28f`
-    )
-      .then((response) => response.json())
-      .then((data) => setTopRated(data.results));
+    );
+    const data = await response.json();
+    setTopRated(data.results);
   };
-  const fetchPopular = () => {
-    fetch(
+  const fetchPopular = async () => {
+    const response = await fetch(
       "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=bdbcaf8078edff33ef48cf08aa49f28f"
-    )
-      .then((response) => response.json())
-      .then((data) => setPopular(data.results));
+    );
+    const data = await response.json();
+    setPopular(data.results);
   };
 
-  const fetchPopularSeries = () => {
-    fetch(
+  const fetchPopularSeries = async () => {
+    const response = await fetch(
       "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=vote_count.desc&api_key=bdbcaf8078edff33ef48cf08aa49f28f"
-    )
-      .then((response) => response.json())
-      .then((data) => setPopularSeries(data.results));
+    );
+    const data = await response.json();
+    setPopularSeries(data.results);
   };
 
-  const fetchTvSeries = () => {
-    fetch(
+  const fetchTvSeries = async () => {
+    const response = await fetch(
       "https://api.themoviedb.org/3/trending/tv/week?language=en-US&api_key=bdbcaf8078edff33ef48cf08aa49f28f"
-    )
-      .then((response) => response.json())
-      .then((data) => setTvSeries(data.results));
+    );
+    const data = await response.json();
+    setTvSeries(data.results);
   };
 
   useEffect(() => {
-    getMovies();
-    fetchTrending();
+    getMovies(query);
+    fetchTrending(dayWeek);
     fetchTopRated();
     fetchPopular();
     fetchPopularSeries();
@@ -174,8 +191,6 @@ function App() {
     />
   ));
 
-  // console.log(movies);
-
   return (
     <div className="App">
       <Header
@@ -193,6 +208,7 @@ function App() {
             onClick={() => {
               handleDayWeek("day");
               handleButtonClick("day");
+              console.log(dayWeek);
             }}
             className={activeButton === "day" ? "activeButton" : "notActive"}
           >
@@ -214,7 +230,13 @@ function App() {
       <section className="sections">
         <div className="section-1">
           {query ? (
-            <div className="movies">{movie}</div>
+            <div>
+              {fetching ? (
+                "Loading Movies....please wait"
+              ) : (
+                <div className="movies">{movie}</div>
+              )}
+            </div>
           ) : (
             <div>
               <div className="top--rated">
