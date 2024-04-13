@@ -11,7 +11,7 @@ const Trending = (props) => {
       </div>
       <div className="movie--info">
         <h4 className="movie--title">{props.title}</h4>
-        <span>{props.type}</span>
+        {/* <span>{props.type}</span> */}
       </div>
     </div>
   );
